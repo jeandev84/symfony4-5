@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Manager\UserManager;
+use App\Service\GiftsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,12 +19,23 @@ class UserController extends AbstractController
     protected $userManager;
 
 
+
+    /**
+     * @var GiftsService
+    */
+    protected $giftsService;
+
+
     /**
      * @param UserManager $userManager
+     * @param GiftsService $giftsService
     */
-    public function __construct(UserManager  $userManager)
+    public function __construct(UserManager  $userManager, GiftsService $giftsService)
     {
-        $this->userManager = $userManager;
+         /* $giftsService->setGifts(['a', 'b', 'c', 'd']); */
+
+          $this->userManager  = $userManager;
+          $this->giftsService = $giftsService;
     }
 
 
@@ -31,12 +43,14 @@ class UserController extends AbstractController
     /**
      * @Route("/users", name="users")
     */
-    public function index(): Response
+    public function index(GiftsService $giftsService): Response
     {
+
         $users = $this->userManager->findAllUsers();
 
         return $this->render('user/index.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'random_gifts' => $this->giftsService->randomizedGifts()
         ]);
     }
 

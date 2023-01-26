@@ -5,9 +5,10 @@
 {% block body %}
 <div class="container">
     <ul>
+        {# Loop index started from 0 #}
         {% if users is defined %}
             {% for user in users %}
-                <li>{{ user.name }}</li>
+                <li>{{ user.name }} - you won {{ random_gifts[loop.index0] }}</li>
             {% endfor %}
         {% endif %}
     </ul>
