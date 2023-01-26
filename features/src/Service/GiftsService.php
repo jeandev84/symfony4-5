@@ -3,6 +3,8 @@ namespace App\Service;
 
 
 
+use Psr\Log\LoggerInterface;
+
 class GiftsService
 {
 
@@ -15,12 +17,12 @@ class GiftsService
 
 
 
-    public function __construct(array $gifts = [])
+    public function __construct(LoggerInterface $logger)
     {
-        if ($gifts) {
-            $this->setGifts($gifts);
-        }
+         $logger->info('Gifts were randomized!');
     }
+
+
 
     public function setGifts(array $gifts)
     {

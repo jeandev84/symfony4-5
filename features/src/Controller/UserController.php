@@ -50,7 +50,7 @@ class UserController extends AbstractController
 
         return $this->render('user/index.html.twig', [
             'users' => $users,
-            'random_gifts' => $this->giftsService->randomizedGifts()
+            'random_gifts' => $giftsService->randomizedGifts()
         ]);
     }
 
