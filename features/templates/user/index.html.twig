@@ -3,6 +3,8 @@
 {% block title %}Users{% endblock %}
 
 {% block body %}
+
+
 <div class="container">
     <ul>
         {# Loop index started from 0 #}
@@ -13,6 +15,23 @@
         {% endif %}
     </ul>
 </div>
+
+
+{% for message in app.flashes('notice') %}
+<div class="flash-notice">
+    {{ message }}
+</div>
+{% endfor %}
+
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
 {% endblock %}
 
 
