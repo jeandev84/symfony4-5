@@ -32,8 +32,6 @@ class UserController extends AbstractController
     */
     public function __construct(UserManager  $userManager, GiftsService $giftsService)
     {
-         /* $giftsService->setGifts(['a', 'b', 'c', 'd']); */
-
           $this->userManager  = $userManager;
           $this->giftsService = $giftsService;
     }
@@ -45,7 +43,6 @@ class UserController extends AbstractController
     */
     public function index(GiftsService $giftsService): Response
     {
-
         $users = $this->userManager->findAllUsers();
 
         return $this->render('user/index.html.twig', [
