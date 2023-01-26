@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -37,5 +38,18 @@ class CookieController
         $response->send();
 
         return $response;
+    }
+
+
+
+    /**
+     * @Route("/session-id", name="session.id")
+    */
+    public function showSessionIdFromRequest(Request $request)
+    {
+          // this will be show SESSION ID only if session started!
+          // session_start();
+
+          exit($request->cookies->get('PHPSESSID'));
     }
 }
