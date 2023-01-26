@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+<div class="container">
+    <ul>
+        {% if users is defined %}
+            {% for user in users %}
+                <li>{{ user.name }}</li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}
+
+
+{% block javascripts %}
+  <script></script>
+{% endblock %}

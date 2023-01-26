@@ -1,22 +1,21 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends AbstractController
+class HomeController extends AbstractController
 {
+
+
     /**
      * @Route("/", name="home")
     */
     public function index(): Response
     {
-        $users = ['Adam', 'Robert', 'John', 'Susan'];
-
-        return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
-            'users' => $users
-        ]);
+        return $this->render('home/index.html.twig');
     }
 }
