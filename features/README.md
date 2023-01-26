@@ -17,7 +17,9 @@ $ bin/console make:controller
 $ bin/console make:entity
 $ bin/console make:migration
 $ bin/console doctrine:migrations:migrate
+$ bin/console cache:clear
 ```
+
 
 3. Debug 
 ```
