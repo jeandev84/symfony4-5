@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/**
+ * @Route("/api/v1/users", name="api.v1.users.")
+*/
 class UserController extends AbstractController
 {
 
@@ -40,7 +44,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/users", name="users")
+     * @Route("", name="list")
     */
     public function index(GiftsService $giftsService, Request $request): Response
     {
@@ -70,9 +74,38 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/create/users", name="create.users")
-     */
-    public function createUsers(): Response
+     * @Route("/create", name="create", methods={"POST"})
+    */
+    public function createUsers(Request $request): Response
+    {
+        $this->userManager->createUser($request->request->all());
+
+        return new JsonResponse(['success' => 'Users successfully created!']);
+    }
+
+
+
+
+    /**
+     * @Route("/users/{id}", name="show")
+    */
+    public function showUser(int $id): JsonResponse
+    {
+        if (! $user = $this->userManager->findOneUserById(23)) {
+            $this->createNotFoundException('The users does not exist');
+        }
+
+        return new JsonResponse(compact('user'));
+    }
+
+
+
+
+
+    /**
+     * @Route("/fake-users", name="fake-users")
+    */
+    public function createFakeUsers(): Response
     {
         $this->userManager->createFakeUsers([
             ['name' => 'Adam'],
@@ -81,7 +114,8 @@ class UserController extends AbstractController
             ['name' => 'Susan']
         ]);
 
-
         return new JsonResponse(['success' => 'Users successfully created!']);
     }
+
+
 }
