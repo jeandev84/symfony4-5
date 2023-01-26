@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ title }}{% endblock %}
+
+{% set users = [{name: 'John', active: 'true'}, {name: 'Susan', active: 'true'}, {name: 'Robert', active: 'true'}, {name: 'FakeUser', active: 'false'}] %}
+
+{% block body %}
+    <div class="container">
+
+           <h1>Hello [ {{ announce|upper }} ]</h1>
+
+          {#
+          {% for user in users  if user.active == 'true' %}
+               <p>{{ user.name }}</p>
+          {% else %}
+              No users where found
+          {% endfor %}
+          #}
+
+         {% if users %}
+             {% for user in users %}
+                 <p>{{ user.name }}</p>
+             {% endfor %}
+         {% else %}
+             No users where found
+         {% endif %}
+
+        {{ include('includes/subview.html.twig', {'users': users}) }}
+
+        {% for i in 1..10 %}
+            <div class="{{ cycle(['even', 'odd'], i) }}">{{ i }}</div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        //alert(2)
+    </script>
+{% endblock %}
