@@ -6,6 +6,7 @@ use App\Manager\UserManager;
 use App\Service\GiftsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -41,9 +42,23 @@ class UserController extends AbstractController
     /**
      * @Route("/users", name="users")
     */
-    public function index(GiftsService $giftsService): Response
+    public function index(GiftsService $giftsService, Request $request): Response
     {
         $users = $this->userManager->findAllUsers();
+
+        // http://localhost:8000/users?page=10
+        // exit($request->query->get('page', 'default'));
+        // exit($request->request->get('username', ''));
+        // exit($request->server->get('HTTP_HOST'));
+
+
+        if ($request->isXmlHttpRequest()) { // is it an Ajax request ?
+             // do something
+        }
+
+
+        $uploadedFile = $request->files->get('photo');
+
 
         return $this->render('user/index.html.twig', [
             'users' => $users,
