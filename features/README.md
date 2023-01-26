@@ -25,3 +25,12 @@ $ bin/console cache:clear
 ```
 $ bin/console debug:container
 ```
+
+4. Binding Services To Controller 
+```
+# add more service definitions when explicit configuration is needed
+# please note that last definitions always *replace* previous ones
+App\Controller\DemoController:
+    bind:
+      $logger: '@monolog.logger.doctrine'
+```
