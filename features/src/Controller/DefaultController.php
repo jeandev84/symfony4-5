@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,11 +9,14 @@ class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="home")
-     */
+    */
     public function index(): Response
     {
+        $users = ['Adam', 'Robert', 'John', 'Susan'];
+
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
+            'users' => $users
         ]);
     }
 }
