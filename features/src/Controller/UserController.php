@@ -45,9 +45,6 @@ class UserController extends AbstractController
     {
         $users = $this->userManager->findAllUsers();
 
-        $this->addFlash('notice', 'Your changes were saved!');
-        $this->addFlash('warning', 'Your changes were saved!');
-
         return $this->render('user/index.html.twig', [
             'users' => $users,
             'random_gifts' => $giftsService->randomizedGifts()
