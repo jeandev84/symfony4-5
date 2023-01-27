@@ -8,6 +8,7 @@ $ composer require maker
 $ composer require orm
 $ composer require logger
 $ composer require logger -W [ flag (-W) resolve dependencies ]
+$ composer require symfony/asset
 ```
 
 

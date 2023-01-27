@@ -2,41 +2,36 @@
 
 {% block title %}Hello {{ title }}{% endblock %}
 
-{% set users = [{name: 'John', active: 'true'}, {name: 'Susan', active: 'true'}, {name: 'Robert', active: 'true'}, {name: 'FakeUser', active: 'false'}] %}
-
+{% set string = "some string \n from \n database" %}
 {% block body %}
+
     <div class="container">
 
-           <h1>Hello [ {{ announce|upper }} ]</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ path('home') }}">Home</a></li>
+            </ul>
+        </nav>
+        <div class="absolute-path">
+            <a href="{{ url('home') }}">Click on absolute path!</a>
+        </div>
+        <div>{{ asset('images/coffee-time.jpg') }}</div>
+        <div>{{ absolute_url(asset('images/coffee-time.jpg')) }}</div>
+        <div class="image-path">
+            <img src="{{ absolute_url(asset('images/coffee-time.jpg')) }}" alt="Coffee Time">
+        </div>
 
-          {#
-          {% for user in users  if user.active == 'true' %}
-               <p>{{ user.name }}</p>
-          {% else %}
-              No users where found
-          {% endfor %}
-          #}
-
-         {% if users %}
-             {% for user in users %}
-                 <p>{{ user.name }}</p>
-             {% endfor %}
-         {% else %}
-             No users where found
-         {% endif %}
-
-        {{ include('includes/subview.html.twig', {'users': users}) }}
-
-        {% for i in 1..10 %}
-            <div class="{{ cycle(['even', 'odd'], i) }}">{{ i }}</div>
-        {% endfor %}
+        {{ string|escape('html') }}
     </div>
+
 {% endblock %}
 
 
 {% block javascripts %}
-    {{ parent() }}
     <script>
-        //alert(2)
+        var route = "{{ string|escape('js') }}";
+
+        alert(route)
+
     </script>
 {% endblock %}
