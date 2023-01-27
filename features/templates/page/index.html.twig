@@ -22,8 +22,10 @@
         </div>
 
         {{ string|escape('html') }}
+
     </div>
 
+     <p>The google tracking code is: {{ ga_code }} from ./config/packages/twig.yaml</p>
 {% endblock %}
 
 
@@ -31,7 +33,7 @@
     <script>
         var route = "{{ string|escape('js') }}";
 
-        alert(route)
+       // alert(route)
 
     </script>
 {% endblock %}
