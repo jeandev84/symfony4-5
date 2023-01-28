@@ -67,10 +67,16 @@ class UserCrudController extends AbstractController
       /**
        * @Route("/admin/users/create", name="admin.users.create", methods={"POST"})
       */
-      public function create(): Response
+      public function create(Request $request): Response
       {
+          /*
           if($user = $this->userManager->createUser(['name' => 'Robert'])) {
               dump('A new user was saved with id of '. $user->getId());
+          }
+          */
+
+          if ($user = $this->userManager->createUser($request->request->all())) {
+              dd('A new user was saved with id of '. $user->getId());
           }
 
           return $this->render('admin/crud/user/form/create.html.twig');
