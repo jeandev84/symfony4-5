@@ -71,4 +71,43 @@ class UserManager
 
         return $repository->findOneBy(['id' => $id]);
     }
+
+
+    /**
+     * @param int $id
+     * @return User|null
+    */
+    public function findUserById(int $id): ?User
+    {
+        $repository = $this->entityManager->getRepository(User::class);
+
+        return $repository->find($id);
+    }
+
+
+    /**
+     * @param array $criteria
+     * @return User|null
+    */
+    public function findOneUserBy(array $criteria): ?User
+    {
+        $repository = $this->entityManager->getRepository(User::class);
+
+        return $repository->findOneBy($criteria);
+    }
+
+
+    /**
+     * @param array $criteria [WHERE Conditions]
+     * @param array $orderBy [Sorting Extraction]
+     * @param $limit [Max Results]
+     * @param $offset [First Result]
+     * @return User[]
+    */
+    public function findUsersBy(array $criteria, array $orderBy = [], $limit = null, $offset = null): array
+    {
+        $repository = $this->entityManager->getRepository(User::class);
+
+        return $repository->findBy($criteria, $orderBy, $limit, $offset);
+    }
 }
