@@ -34,7 +34,7 @@ class UserCrudController extends AbstractController
       */
       public function list(): Response
       {
-          return $this->render('admin/crud/user/list.html.twig', [
+          return $this->render('admin/user/list.html.twig', [
               'users' => $this->userManager->getUsers()
           ]);
       }
@@ -56,7 +56,7 @@ class UserCrudController extends AbstractController
 
          dump($user);
 
-         return $this->render('admin/crud/user/show.html.twig', [
+         return $this->render('admin/user/show.html.twig', [
             'user' => $this->userManager->findUserById($id)
          ]);
       }
@@ -69,7 +69,7 @@ class UserCrudController extends AbstractController
       */
       public function create(): Response
       {
-          return $this->render('admin/crud/user/form/create.html.twig');
+          return $this->render('admin/user/form/create.html.twig');
       }
 
 
@@ -94,7 +94,7 @@ class UserCrudController extends AbstractController
     */
     public function edit(User $user): Response
     {
-        return $this->render('admin/crud/user/form/edit.html.twig', [
+        return $this->render('admin/user/form/edit.html.twig', [
              'user' => $user
         ]);
     }
