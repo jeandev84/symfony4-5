@@ -44,6 +44,10 @@ services:
            $adminEmail: '%admin_email%'
 
 
-    App\Service\MyFirstService:
-        arguments:
-           $secondService: '@App\Service\MySecondService'
+#    App\Service\MyFirstService:
+#        arguments:
+#           $secondService: '@App\Service\MySecondService'
+
+
+#    App\Service\FooService:
+#        autowire: false
