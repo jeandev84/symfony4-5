@@ -1,0 +1,7 @@
+<h1>Edit User [ {{ user.id }} ]</h1>
+<div class="create-user">
+    <form action="{{ path('admin.users.update', {'id': user.id }) }}" method="POST">
+        <input type="hidden" name="_method" value="PUT">
+        {% include 'admin/crud/user/partials/_form.twig.html' %}
+    </form>
+</div>

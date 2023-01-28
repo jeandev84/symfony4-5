@@ -65,35 +65,53 @@ class UserCrudController extends AbstractController
 
 
       /**
-       * @Route("/admin/users/create", name="admin.users.create", methods={"POST"})
+       * @Route("/admin/users/create", name="admin.users.create", methods={"GET"})
       */
-      public function create(Request $request): Response
+      public function create(): Response
       {
-          /*
-          if($user = $this->userManager->createUser(['name' => 'Robert'])) {
-              dump('A new user was saved with id of '. $user->getId());
-          }
-          */
-
-          if ($user = $this->userManager->createUser($request->request->all())) {
-              dd('A new user was saved with id of '. $user->getId());
-          }
-
           return $this->render('admin/crud/user/form/create.html.twig');
       }
+
+
+
+
+
+     /**
+      * @Route("/admin/users/store", name="admin.users.store", methods={"POST"})
+     */
+     public function store(Request $request): Response
+     {
+         $user = $this->userManager->createUser($request->request->all());
+
+         return new JsonResponse(['success' => "A new user was saved with id of {$user->getId()}"], Response::HTTP_OK);
+     }
+
+
+
+
+    /**
+     * @Route("/admin/users/{id}/edit", name="admin.users.edit", methods={"GET"})
+    */
+    public function edit(User $user): Response
+    {
+        return $this->render('admin/crud/user/form/edit.html.twig', [
+             'user' => $user
+        ]);
+    }
+
 
 
 
      /**
       * @Route("/admin/users/{id}", name="admin.users.update", methods={"PUT"})
      */
-     public function update(Request $request, $id): Response
+     public function update(Request $request, $id): JsonResponse
      {
-          if ($user = $this->userManager->updateUser($id, $request->request->all())) {
+          if (! $user = $this->userManager->updateUser($id, $request->request->all())) {
               dump("user {$user->getId()} was updated");
           }
 
-          return $this->render('admin/crud/user/form/edit.html.twig');
+         return new JsonResponse(['success' => "User with id {$id} updated!"], Response::HTTP_OK);
      }
 
 
@@ -102,13 +120,13 @@ class UserCrudController extends AbstractController
     /**
      * @Route("/admin/users/{id}", name="admin.users.delete", methods={"DELETE"})
      */
-    public function delete($id): Response
+    public function delete($id): JsonResponse
     {
         if ($this->userManager->deleteUserById($id)) {
             dump("User with id {$id} deleted");
         }
 
-        return new JsonResponse(['success' => "User with id {$id} deleted"]);
+        return new JsonResponse(['success' => "User with id {$id} deleted"], Response::HTTP_NO_CONTENT);
     }
 
 

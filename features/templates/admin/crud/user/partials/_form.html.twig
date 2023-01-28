@@ -1,9 +1,9 @@
-<form action="{{ path('admin.users.create') }}" method="POST">
+<div class="inputs">
     <div>
         <label for="name">Name</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" {% if user is defined %}value="{{ user.name }}{% endif %}">
     </div>
     <div>
         <button type="submit" id="save-user">Save</button>
     </div>
-</form>
+</div>
