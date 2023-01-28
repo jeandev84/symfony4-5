@@ -2,6 +2,7 @@
 namespace App\Manager;
 
 use App\Entity\User;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 
 class UserManager
@@ -42,9 +43,9 @@ class UserManager
 
 
 
-    public function updateUserById(int $id, array $payload)
+    public function updateUserById(int $userId, array $payload)
     {
-         if(!$user = $this->findUserById($id)) {
+         if(!$user = $this->findUserById($userId)) {
               return false;
          }
 
@@ -82,12 +83,12 @@ class UserManager
 
 
     /**
-     * @param int $id
+     * @param int $userId
      * @return bool
     */
-    public function deleteUserById(int $id): bool
+    public function deleteUserById(int $userId): bool
     {
-        if(!$user = $this->findUserById($id)) {
+        if(!$user = $this->findUserById($userId)) {
             return false;
         }
 
@@ -107,23 +108,36 @@ class UserManager
 
 
 
-    public function getOneUserById(int $id)
+    public function getOneUserById(int $userId)
     {
         $repository = $this->entityManager->getRepository(User::class);
 
-        return $repository->findOneBy(['id' => $id]);
+        return $repository->findOneBy(['id' => $userId]);
+    }
+
+
+
+
+
+    /**
+     * @param int $userId
+     * @return Collection
+    */
+    public function getUserVideos(int $userId): Collection
+    {
+         return $this->findUserById($userId)->getVideos();
     }
 
 
     /**
-     * @param int $id
+     * @param int $userId
      * @return User|null
     */
-    public function findUserById(int $id): ?User
+    public function findUserById(int $userId): ?User
     {
         $repository = $this->entityManager->getRepository(User::class);
 
-        return $repository->find($id);
+        return $repository->find($userId);
     }
 
 

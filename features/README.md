@@ -68,7 +68,7 @@ $ bin/console list doctrine (List all commands of doctrine)
 $ bin/console doctrine:schema:drop -n -q --force --full-database
 $ rm ./migrations/*.php
 $ bin/console make:migration
-$ bin/console doctrine:migrations:migrate
+$ bin/console doctrine:migrations:migrate -n -q
 $ bin/console doctrine:fixtures:load [IF HAS FIXTURES]
  Careful, database "main" will be purged. Do you want to continue? (yes/no) [no]:
  > yes
@@ -83,10 +83,9 @@ $ bin/console doctrine:fixtures:load [IF HAS FIXTURES]
 
 $ bin/console doctrine:schema:drop -n -q --force --full-database &
   rm ./migrations/*.php &
-  bin/console make:migration
-   
-$ bin/console doctrine:migrations:migrate
-$ bin/console doctrine:fixtures:load
+  bin/console make:migration &
+  bin/console doctrine:migrations:migrate -n -q &
+  bin/console doctrine:fixtures:load
 ```
 
 
@@ -256,4 +255,17 @@ What type of relationship is this?
  ========================================================================================
  $ bin/console make:migration
  $ bin/console doctrine:migrations:migrate
+ 
+ =======================================================================================
+ REBOOT DATABASE:
+ 
+$ bin/console doctrine:schema:drop -n -q --force --full-database && rm ./migrations/*.php && bin/console make:migration && bin/console doctrine:migrations:migrate -n -q
+
+
+=======================================================================================
+FIXTURE LOAD ALL || FIXTURE ONE BY ONE
+
+$ bin/console doctrine:fixtures:load
+$ bin/console doctrine:fixtures:load --group=VideoFixtures
+$ bin/console doctrine:fixtures:load --group=UserFixtures
 ```

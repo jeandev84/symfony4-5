@@ -76,8 +76,11 @@ class User
     {
          $this->createdAt = new \DateTime();
 
-         dump($this->createdAt);
+         // dump($this->createdAt);
     }
+
+
+
 
     /**
      * @return Collection<int, Video>

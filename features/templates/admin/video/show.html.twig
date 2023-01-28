@@ -1,0 +1,7 @@
+{% if video %}
+    <div class="user-details">
+        <h3>ID : {{ video.id }}</h3>
+        <p>Name : {{ video.title }}</p>
+        <p>Author: {{ video.user.name }}</p>
+    </div>
+{% endif %}

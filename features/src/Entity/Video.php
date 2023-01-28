@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=VideoRepository::class)
+ * @ORM\HasLifecycleCallbacks()
 */
 class Video
 {
@@ -68,5 +69,16 @@ class Video
         $this->user = $user;
 
         return $this;
+    }
+
+
+    /**
+     * @ORM\PrePersist
+    */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
+
+        //dump($this->createdAt);
     }
 }
