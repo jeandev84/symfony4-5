@@ -40,6 +40,19 @@ class UserManager
 
 
 
+    public function updateUser(int $id, array $payload)
+    {
+         if(!$user = $this->findUserById($id)) {
+              return false;
+         }
+
+         $user->setName($payload['name']);
+
+         return $this->saveUser($user);
+    }
+
+
+
     public function createFakeUsers(array $users)
     {
           foreach ($users as $payload) {

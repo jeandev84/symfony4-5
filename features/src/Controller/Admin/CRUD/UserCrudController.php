@@ -3,6 +3,7 @@ namespace App\Controller\Admin\CRUD;
 
 use App\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -62,6 +63,20 @@ class UserCrudController extends AbstractController
               dump('A new user was saved with id of '. $user->getId());
           }
 
-          return $this->render('admin/crud/user/create.html.twig');
+          return $this->render('admin/crud/user/form/create.html.twig');
       }
+
+
+
+     /**
+      * @Route("/admin/users/{id}", name="admin.users.update", methods={"PUT"})
+     */
+     public function update(Request $request, $id): Response
+     {
+          if ($user = $this->userManager->updateUser($id, $request->request->all())) {
+              dump("user {$user->getId()} was updated");
+          }
+
+          return $this->render('admin/crud/user/form/edit.html.twig');
+     }
 }
