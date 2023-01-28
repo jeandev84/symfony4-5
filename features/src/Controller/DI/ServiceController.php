@@ -1,11 +1,13 @@
 <?php
-namespace App\Controller\Services;
+namespace App\Controller\DI;
 
+use App\Entity\User;
 use App\Service\DemoService;
 use App\Service\Lazy\FirstService;
 use App\Service\MyFirstService;
 use App\Service\MyServiceWithAlias;
 use App\Service\PropertyService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -84,13 +86,22 @@ class ServiceController  extends AbstractController
 
              dd($this->container);
 
-             // dd($this->checkServiceWithAliasFromContainer());
+             // dd($this->container->get('app.service.alias'));
       }
 
 
 
-      public function checkServiceWithAliasFromContainer()
+
+      /**
+       * @Route("/tags-service", name="tags.service")
+      */
+      public function showServiceTags(EntityManagerInterface $entityManager)
       {
-           return $this->container->get('app.service.alias');
+            $user = $entityManager->getRepository(User::class)->find(1);
+            $user->setName('Rob');
+
+            $entityManager->flush();
+
+            dd($user);
       }
 }

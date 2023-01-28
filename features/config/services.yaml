@@ -80,3 +80,9 @@ services:
 
 
     App\Service\MyServiceWithAlias: '@app.service.alias'
+
+
+    App\Service\Tag\ServiceTags:
+        tags:
+          - { name: doctrine.event_listener, event: postFlush }
+          - { name: kernel.cache_clearer }
