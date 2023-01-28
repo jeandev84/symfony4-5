@@ -4,8 +4,10 @@ namespace App\Controller\Services;
 use App\Service\DemoService;
 use App\Service\Lazy\FirstService;
 use App\Service\MyFirstService;
+use App\Service\MyServiceWithAlias;
 use App\Service\PropertyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -14,26 +16,20 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServiceController  extends AbstractController
 {
 
-       /**
-        * @var DemoService
-       */
-       protected $demoService;
+
+       protected $container;
 
 
-       /**
-        * @param DemoService $demoService
-       */
-       public function __construct(DemoService $demoService)
+       public function __construct(ContainerInterface $container)
        {
-            $this->demoService = $demoService;
+            $this->container = $container;
        }
-
 
 
        /**
         * @Route("/demo-service", name="demo.service")
        */
-       public function showService(DemoService $demoService)
+       public function showDemoService(DemoService $demoService)
        {
              dd($demoService);
        }
@@ -74,5 +70,27 @@ class ServiceController  extends AbstractController
             // dd($firstService);
 
             dd($service->secondService->someMethod());
+      }
+
+
+
+
+      /**
+       * @Route("/alias-service", name="alias.service")
+      */
+      public function showServiceWithAlias(MyServiceWithAlias $myServiceWithAlias)
+      {
+             dump($myServiceWithAlias);
+
+             dd($this->container);
+
+             // dd($this->checkServiceWithAliasFromContainer());
+      }
+
+
+
+      public function checkServiceWithAliasFromContainer()
+      {
+           return $this->container->get('app.service.alias');
       }
 }

@@ -68,3 +68,15 @@ services:
 
     App\Service\Lazy\SecondService:
         lazy: true
+
+
+
+    app.service.alias:
+        class: App\Service\MyServiceWithAlias
+        arguments:
+           $definition: []
+           $something: 'some string argument.'
+        public: true
+
+
+    App\Service\MyServiceWithAlias: '@app.service.alias'
