@@ -47,10 +47,10 @@ class UserCrudController extends AbstractController
 
 
       /**
-       * @Route("/admin/users-videos", name="admin.users.videos", methods={"GET"})
+       * @Route("/admin/users-demo", name="admin.users.demo", methods={"GET"})
        * @throws NonUniqueResultException
       */
-      public function listUserVideos(): Response
+      public function demo(): Response
       {
            /*
            $user = $this->userManager->findUserById(1);
@@ -61,7 +61,7 @@ class UserCrudController extends AbstractController
 
            dump($user);
 
-           return new Response("List user videos");
+           return $this->render('admin/user/demo/index.html.twig');
       }
 
 

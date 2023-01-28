@@ -9,7 +9,10 @@ $ composer require orm
 $ composer require logger
 $ composer require logger -W [ flag (-W) resolve dependencies ]
 $ composer require symfony/asset
-$ composer require symfony/web-profiler-bundle
+
+============= DEBUG BUNDLE ============================================================
+$ composer require symfony/web-profiler-bundle || composer require web-profiler-bundle
+$ composer require symfony/debug-bundle
 ```
 
 
