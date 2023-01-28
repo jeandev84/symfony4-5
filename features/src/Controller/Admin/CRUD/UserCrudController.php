@@ -2,6 +2,9 @@
 namespace App\Controller\Admin\CRUD;
 
 use App\Manager\UserManager;
+use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\Exception;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -9,10 +12,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
+
 class UserCrudController extends AbstractController
 {
 
-       /**
+      /**
         * @var UserManager
       */
       protected $userManager;
@@ -94,5 +98,25 @@ class UserCrudController extends AbstractController
         }
 
         return new JsonResponse(['success' => "User with id {$id} deleted"]);
+    }
+
+
+
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @return mixed
+     * @throws Exception
+    */
+    public function rawQueries(EntityManagerInterface $entityManager)
+    {
+         $conn = $entityManager->getConnection();
+
+         $sql = ' SELECT * FROM user u  WHERE u.id > :id';
+
+         /** @var  Statement $statement */
+         $statement = $conn->prepare($sql);
+         $statement->executeQuery(['id' => 3]);
+
+         return $users = $statement->fetchAll();
     }
 }
