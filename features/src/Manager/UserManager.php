@@ -42,7 +42,7 @@ class UserManager
 
 
 
-    public function updateUser(int $id, array $payload)
+    public function updateUserById(int $id, array $payload)
     {
          if(!$user = $this->findUserById($id)) {
               return false;

@@ -69,7 +69,7 @@ class UserCrudController extends AbstractController
       */
       public function create(): Response
       {
-          return $this->render('admin/user/form/create.html.twig');
+          return $this->render('admin/user/create.html.twig');
       }
 
 
@@ -90,11 +90,11 @@ class UserCrudController extends AbstractController
 
 
     /**
-     * @Route("/admin/users/{id}/edit", name="admin.users.edit", methods={"GET"})
+     * @Route("/admin/users/{id}/edit", name="admin.users.edit", methods={"GET"}, requirements={"id": "\d+"})
     */
     public function edit(User $user): Response
     {
-        return $this->render('admin/user/form/edit.html.twig', [
+        return $this->render('admin/user/edit.html.twig', [
              'user' => $user
         ]);
     }
@@ -103,11 +103,11 @@ class UserCrudController extends AbstractController
 
 
      /**
-      * @Route("/admin/users/{id}", name="admin.users.update", methods={"PUT"})
+      * @Route("/admin/users/{id}", name="admin.users.update", methods={"PUT"}, requirements={"id": "\d+"})
      */
      public function update(Request $request, $id): JsonResponse
      {
-          if (! $user = $this->userManager->updateUser($id, $request->request->all())) {
+          if (! $user = $this->userManager->updateUserById($id, $request->request->all())) {
               dump("user {$user->getId()} was updated");
           }
 
@@ -118,7 +118,7 @@ class UserCrudController extends AbstractController
 
 
     /**
-     * @Route("/admin/users/{id}", name="admin.users.delete", methods={"DELETE"})
+     * @Route("/admin/users/{id}", name="admin.users.delete", methods={"DELETE"}, requirements={"id": "\d+"})
      */
     public function delete($id): JsonResponse
     {
