@@ -6,4 +6,18 @@
 <div class="container">
     <h1>Welcome to symfony features</h1>
 </div>
+
+<!-- Show authenticated user -->
+{{ app.user }}
+
+<!-- Show param from request: http://localhost:8000/?param=demo -->
+{{ app.request.get('param') }}
+
+<!-- Show environment variable -->
+{{ app.environment }}
+
+
+<!-- Show Session data -->
+{{ dump(app.session) }}
+
 {% endblock %}

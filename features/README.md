@@ -50,3 +50,9 @@ $ npm run build || ./node_modules/.bin/encore production
 $ npm run watch || npm run dev || ./node_modules/.bin/encore dev --watch
 $ yarn encore dev-server
 ```
+
+
+6. Security Bundle package
+```
+$ composer require symfony/security-bundle
+```
