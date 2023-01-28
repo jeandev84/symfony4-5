@@ -4,6 +4,7 @@ namespace App\Repository\Inheritance;
 
 use App\Entity\Inheritance\Author;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -46,6 +47,26 @@ class AuthorRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+
+    /**
+     * @param int $id
+     * @return Author|null
+     * @throws NonUniqueResultException
+    */
+    public function findByIdWithPdfFiles(int $id): ?Author
+    {
+         return $this->createQueryBuilder('a')
+                     ->where('a.id = :id')
+                     ->setParameter('id', $id)
+                     ->innerJoin('a.files', 'f')
+                     ->andWhere('f INSTANCE OF App\Entity\Inheritance\Files\PdfFile')
+                     ->addSelect('f')
+                     ->getQuery()
+                     ->getOneOrNullResult();
+    }
+
+
 
     // /**
     //  * @return Author[] Returns an array of Author objects
