@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin\CRUD;
 
+use App\Entity\User;
 use App\Manager\UserManager;
 use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Exception;
@@ -45,11 +46,15 @@ class UserCrudController extends AbstractController
      /**
       * @Route("/admin/users/{id}", name="admin.users.show", methods={"GET"}, requirements={"id": "\d+"})
      */
-     public function show(int $id): Response
+     public function show(int $id, User $user): Response
      {
+         /*
          $robert = $this->userManager->findOneUserBy(['name' => 'Robert', 'id' => $id]);   // dump($robert);
          $users  = $this->userManager->findUsersBy(['name' => 'Robert'], ['id' => 'DESC']); // dump($users);
+         */
 
+
+         dump($user);
 
          return $this->render('admin/crud/user/show.html.twig', [
             'user' => $this->userManager->findUserById($id)
@@ -93,7 +98,7 @@ class UserCrudController extends AbstractController
      */
     public function delete($id): Response
     {
-        if ($this->userManager->deleteUser($id)) {
+        if ($this->userManager->deleteUserById($id)) {
             dump("User with id {$id} deleted");
         }
 

@@ -9,6 +9,7 @@ $ composer require orm
 $ composer require logger
 $ composer require logger -W [ flag (-W) resolve dependencies ]
 $ composer require symfony/asset
+$ composer require symfony/web-profiler-bundle
 ```
 
 
@@ -85,4 +86,10 @@ $ bin/console doctrine:schema:drop -n -q --force --full-database
   & bin/console make:migration
   & bin/console doctrine:migrations:migrate
   & bin/console doctrine:fixtures:load
+```
+
+
+8. Framework Extra Bundle 
+```
+$ composer require sensio/framework-extra-bundle
 ```

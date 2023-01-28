@@ -69,19 +69,29 @@ class UserManager
 
 
     /**
+     * @param User $user
+     * @return bool
+    */
+    public function deleteUser(User $user): bool
+    {
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+
+        return true;
+    }
+
+
+    /**
      * @param int $id
      * @return bool
     */
-    public function deleteUser(int $id): bool
+    public function deleteUserById(int $id): bool
     {
         if(!$user = $this->findUserById($id)) {
             return false;
         }
 
-        $this->entityManager->remove($user);
-        $this->entityManager->flush();
-
-        return true;
+        return $this->deleteUser($user);
     }
 
 
