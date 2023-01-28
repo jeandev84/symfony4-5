@@ -95,7 +95,7 @@ $ composer require sensio/framework-extra-bundle
 ```
 
 
-9. Doctrine Relationships (OneToMany and ManyToOne)
+9. Doctrine Relationships
 ```
 $ bin/console make:entity Video
 ================================================================================
@@ -272,4 +272,12 @@ $ bin/console doctrine:fixtures:load --group=UserFixtures
 ======================================================================================
 $ bin/console doctrine:database:create
 $ bin/console doctrine:schema:drop -n -q --force --full-database && rm ./migrations/*.php && bin/console make:migration && bin/console doctrine:migrations:migrate -n -q
+```
+
+
+
+10. Doctrine Inheritance mapping  
+```
+Author Entity                       ==> (OneToMany) File Entity (Abstract class: filename, size, description)
+Video  Entity (format description)  => Pdf Entity (pages_number, orientation) extends from Abstract class (File Entity)
 ```
