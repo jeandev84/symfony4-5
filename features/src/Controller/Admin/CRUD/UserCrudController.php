@@ -171,6 +171,35 @@ class UserCrudController extends AbstractController
 
 
 
+    /**
+     * @Route("/admin/add-user-followers")
+    */
+    public function addUserFollowers(): Response
+    {
+          $user1 = $this->userManager->findUserById(2);
+          $user2 = $this->userManager->findUserById(3);
+          $user3 = $this->userManager->findUserById(4);
+          $user4 = $this->userManager->findUserById(5);
+
+          /*
+          $user1->addFollowed($user2);
+          $user1->addFollowed($user3);
+          $user1->addFollowed($user4);
+
+
+          $this->userManager->saveUser($user1);
+          */
+
+
+          dump($user1->getFollowed()->count());
+          dump($user1->getFollowing()->count());
+          dump($user4->getFollowing()->count());
+
+
+          return new Response("User Followers added.");
+    }
+
+
 
 
     /**
