@@ -8,6 +8,7 @@ use App\Manager\VideoManager;
 use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,6 +44,27 @@ class UserCrudController extends AbstractController
            $this->userManager = $userManager;
            $this->videoManager = $videoManager;
       }
+
+
+      /**
+       * @Route("/admin/users-videos", name="admin.users.videos", methods={"GET"})
+       * @throws NonUniqueResultException
+      */
+      public function listUserVideos(): Response
+      {
+           /*
+           $user = $this->userManager->findUserById(1);
+           dump($user);
+           */
+
+           $user = $this->userManager->findOneUserByIdWithVideos(1);
+
+           dump($user);
+
+           return new Response("List user videos");
+      }
+
+
 
 
 

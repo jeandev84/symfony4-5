@@ -3,8 +3,10 @@ namespace App\Manager;
 
 use App\Entity\User;
 use App\Entity\Video;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 
 class UserManager
 {
@@ -185,5 +187,19 @@ class UserManager
         $repository = $this->entityManager->getRepository(User::class);
 
         return $repository->findBy($criteria, $orderBy, $limit, $offset);
+    }
+
+
+    /**
+     * @param int $id
+     * @return User|null
+     * @throws NonUniqueResultException
+    */
+    public function findOneUserByIdWithVideos(int $id): ?User
+    {
+        /** @var UserRepository $repository */
+        $repository = $this->entityManager->getRepository(User::class);
+
+        return $repository->findWithVideos($id);
     }
 }

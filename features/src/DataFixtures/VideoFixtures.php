@@ -12,7 +12,7 @@ class VideoFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $user = new User();
-        $user->setName('Audrey');
+        $user->setName('Robert');
 
         for ($i = 1; $i <= 3; $i++) {
            $video = new Video();

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -46,6 +47,27 @@ class UserRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+
+    /**
+     * @param int $id
+     * @return User|null
+     * @throws NonUniqueResultException
+    */
+    public function findWithVideos(int $id): ?User
+    {
+         $queryBuilder = $this->createQueryBuilder('u')
+                              ->innerJoin('u.videos', 'v')
+                              ->addSelect('v') // eager loading
+                              ->andWhere('u.id = :id')
+                              ->setParameter('id', $id);
+
+
+         return $queryBuilder->getQuery()->getOneOrNullResult();
+    }
+
+
+
 
     // /**
     //  * @return User[] Returns an array of User objects
