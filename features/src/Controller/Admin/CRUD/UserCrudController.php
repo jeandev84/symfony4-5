@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin\CRUD;
 
+use App\Entity\Address;
 use App\Entity\User;
 use App\Manager\UserManager;
 use App\Manager\VideoManager;
@@ -166,6 +167,35 @@ class UserCrudController extends AbstractController
         }
 
         return new JsonResponse(['success' => "User with id {$id} deleted"], Response::HTTP_NO_CONTENT);
+    }
+
+
+
+
+
+    /**
+     * @Route("/admin/users/create-with-address", name="admin.users.create.with.address", methods={"GET"})
+    */
+    public function createUserWithAddress(EntityManagerInterface $entityManager): Response
+    {
+          $user = new User();
+          $user->setName('John');
+
+          $address = new Address();
+          $address->setStreet('street');
+          $address->setNumber(23);
+          $user->setAddress($address);
+
+          // cascade={"persist"} mean that, you don't need to persist again $address
+          // Because address will be automatically created when create a new $user
+          // $entityManager->persist($address);
+          $entityManager->persist($user);
+
+          $entityManager->flush();
+
+          /* dump($user->getAddress()->getStreet()); */
+
+          return new Response($user->getAddress()->getStreet());
     }
 
 
