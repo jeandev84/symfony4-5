@@ -13,7 +13,7 @@ class ExceptionHandlerController extends AbstractController
 
          public function createExceptionHandler(UserManager $userManager)
          {
-              if (! $userManager->findOneUserById(23)) {
+              if (! $userManager->getOneUserById(23)) {
                    $this->createNotFoundException('The users does not exist');
               }
          }

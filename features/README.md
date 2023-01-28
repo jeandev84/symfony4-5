@@ -56,3 +56,33 @@ $ yarn encore dev-server
 ```
 $ composer require symfony/security-bundle
 ```
+
+
+7. Doctrine CRUD 
+```
+$ composer require orm-fixtures --dev
+$ bin/console make:fixtures (Make UserFixtures)
+$ bin/console list doctrine (List all commands of doctrine)
+
+$ bin/console doctrine:schema:drop -n -q --force --full-database
+$ rm ./migrations/*.php
+$ bin/console make:migration
+$ bin/console doctrine:migrations:migrate
+$ bin/console doctrine:fixtures:load [IF HAS FIXTURES]
+ Careful, database "main" will be purged. Do you want to continue? (yes/no) [no]:
+ > yes
+
+   > purging database
+   > loading App\DataFixtures\AppFixtures
+   > loading App\DataFixtures\UserFixtures
+
+==============================================================================
+                    OR ONE LINE :
+==============================================================================
+
+$ bin/console doctrine:schema:drop -n -q --force --full-database
+  & rm ./migrations/*.php
+  & bin/console make:migration
+  & bin/console doctrine:migrations:migrate
+  & bin/console doctrine:fixtures:load
+```

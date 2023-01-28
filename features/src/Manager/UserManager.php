@@ -56,7 +56,7 @@ class UserManager
     /**
      * @return User[]
     */
-    public function findAllUsers(): array
+    public function getUsers(): array
     {
          $repository = $this->entityManager->getRepository(User::class);
 
@@ -65,7 +65,7 @@ class UserManager
 
 
 
-    public function findOneUserById(int $id)
+    public function getOneUserById(int $id)
     {
         $repository = $this->entityManager->getRepository(User::class);
 

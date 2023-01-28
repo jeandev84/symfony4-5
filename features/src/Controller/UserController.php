@@ -48,7 +48,7 @@ class UserController extends AbstractController
     */
     public function index(GiftsService $giftsService, Request $request): Response
     {
-        $users = $this->userManager->findAllUsers();
+        $users = $this->userManager->getUsers();
 
         // http://localhost:8000/users?page=10
         // exit($request->query->get('page', 'default'));
@@ -91,7 +91,7 @@ class UserController extends AbstractController
     */
     public function showUser(int $id): JsonResponse
     {
-        if (! $user = $this->userManager->findOneUserById(23)) {
+        if (! $user = $this->userManager->getOneUserById(23)) {
             $this->createNotFoundException('The users does not exist');
         }
 
