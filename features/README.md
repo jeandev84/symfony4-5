@@ -283,4 +283,373 @@ $ bin/console doctrine:schema:drop -n -q --force --full-database && rm ./migrati
 ```
 Author Entity                       ==> (OneToMany) File Entity (Abstract class: filename, size, description)
 Video  Entity (format description)  => Pdf Entity (pages_number, orientation) extends from Abstract class (File Entity)
+
+
+=========================== MAKE ENTITY ==============================================
+
+@terminal$ bin/console make:entity
+
+ Class name of the entity to create or update (e.g. GentleChef):
+ > Author
+
+ created: src/Entity/Author.php
+ created: src/Repository/AuthorRepository.php
+ 
+ Entity generated! Now let's add some fields!
+ You can always add more fields later manually or by re-running this command.
+
+ New property name (press <return> to stop adding fields):
+ > name
+
+ Field type (enter ? to see all types) [string]:
+ > 
+
+ Field length [255]:
+ > 
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > 
+
+ updated: src/Entity/Author.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > 
+
+
+           
+  Success! 
+           
+
+ Next: When you're ready, create a migration with php bin/console make:migration
+ 
+@terminal$ clear
+@terminal$ bin/console make:entity
+
+ Class name of the entity to create or update (e.g. BravePopsicle):
+ > File
+
+ created: src/Entity/File.php
+ created: src/Repository/FileRepository.php
+ 
+ Entity generated! Now let's add some fields!
+ You can always add more fields later manually or by re-running this command.
+
+ New property name (press <return> to stop adding fields):
+ > filename
+
+ Field type (enter ? to see all types) [string]:
+ > 
+
+ Field length [255]:
+ > 
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > 
+
+ updated: src/Entity/File.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > size
+
+ Field type (enter ? to see all types) [string]:
+ > 
+
+ Field length [255]:
+ > ^C
+@terminal$ clear
+@terminal$ bin/console make:entity File
+
+ Your entity already exists! So let's add some new fields!
+
+ New property name (press <return> to stop adding fields):
+ > size
+
+ Field type (enter ? to see all types) [string]:
+ > integer
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > 
+
+ updated: src/Entity/File.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > description
+
+ Field type (enter ? to see all types) [string]:
+ > 
+
+ Field length [255]:
+ > 
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > 
+
+ updated: src/Entity/File.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > 
+
+
+           
+  Success! 
+           
+
+ Next: When you're ready, create a migration with php bin/console make:migration
+ 
+@terminal$ bin/console make:entity
+
+ Class name of the entity to create or update (e.g. GentleChef):
+ > Video
+
+ Your entity already exists! So let's add some new fields!
+
+ New property name (press <return> to stop adding fields):
+ > format
+
+ Field type (enter ? to see all types) [string]:
+ > 
+@terminal$ clear
+@terminal$ bin/console make:entity
+
+ Class name of the entity to create or update (e.g. TinyPopsicle):
+ > VideoFile
+
+ created: src/Entity/VideoFile.php
+ created: src/Repository/VideoFileRepository.php
+ 
+ Entity generated! Now let's add some fields!
+ You can always add more fields later manually or by re-running this command.
+
+ New property name (press <return> to stop adding fields):
+ > format
+
+ Field type (enter ? to see all types) [string]:
+ > 
+
+ Field length [255]:
+ > 
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > 
+
+ updated: src/Entity/VideoFile.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > duration
+
+ Field type (enter ? to see all types) [string]:
+ > integer
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > 
+
+ updated: src/Entity/VideoFile.php
+
+
+ 
+@terminal$ clear
+@terminal$ bin/console make:entity
+
+ Class name of the entity to create or update (e.g. GentlePopsicle):
+ > PdfFile
+
+ created: src/Entity/PdfFile.php
+ created: src/Repository/PdfFileRepository.php
+ 
+ Entity generated! Now let's add some fields!
+ You can always add more fields later manually or by re-running this command.
+
+ New property name (press <return> to stop adding fields):
+ > pages_number
+
+ Field type (enter ? to see all types) [string]:
+ > integer
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > 
+
+ updated: src/Entity/PdfFile.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > orientation
+
+ Field type (enter ? to see all types) [string]:
+ > 
+
+ Field length [255]:
+ > 
+
+ Can this field be null in the database (nullable) (yes/no) [no]:
+ > 
+
+ updated: src/Entity/PdfFile.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > 
+
+
+           
+  Success! 
+           
+
+ Next: When you're ready, create a migration with php bin/console make:migration
+ 
+@terminal$ clear
+@terminal$ bin/console make:entity
+
+ Class name of the entity to create or update (e.g. TinyPuppy):
+ > Inheritance\Author
+
+ Your entity already exists! So let's add some new fields!
+
+ New property name (press <return> to stop adding fields):
+ > files
+
+ Field type (enter ? to see all types) [string]:
+ > relation
+
+ What class should this entity be related to?:
+ > Inheritance\File
+
+What type of relationship is this?
+ ------------ ------------------------------------------------------------------ 
+  Type         Description                                                       
+ ------------ ------------------------------------------------------------------ 
+  ManyToOne    Each Author relates to (has) one File.                            
+               Each File can relate to (can have) many Author objects            
+                                                                                 
+  OneToMany    Each Author can relate to (can have) many File objects.           
+               Each File relates to (has) one Author                             
+                                                                                 
+  ManyToMany   Each Author can relate to (can have) many File objects.           
+               Each File can also relate to (can also have) many Author objects  
+                                                                                 
+  OneToOne     Each Author relates to (has) exactly one File.                    
+               Each File also relates to (has) exactly one Author.               
+ ------------ ------------------------------------------------------------------ 
+
+ Relation type? [ManyToOne, OneToMany, ManyToMany, OneToOne]:
+ > OneToMany
+
+ A new property will also be added to the File class so that you can access and set the related Author object from it.
+
+ New field name inside File [author]:
+ > 
+
+ Is the File.author property allowed to be null (nullable)? (yes/no) [yes]:
+ > 
+
+ updated: src/Entity/Inheritance/Author.php
+ updated: src/Entity/Inheritance/File.php
+
+ Add another property? Enter the property name (or press <return> to stop adding fields):
+ > 
+
+
+           
+  Success! 
+           
+
+ Next: When you're ready, create a migration with php bin/console make:migration
+ 
+@terminal$ 
+
+
+===================================================================================================
+
+<?php
+namespace App\Entity\Inheritance;
+
+
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\Inheritance\FileRepository;
+
+
+/**
+ * @ORM\Entity(repositoryClass=FileRepository::class)
+*/
+abstract class File
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $filename;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $size;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="files")
+     */
+    private $author;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(string $filename): self
+    {
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getSize(): ?int
+    {
+        return $this->size;
+    }
+
+    public function setSize(int $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+}
+
+
 ```
