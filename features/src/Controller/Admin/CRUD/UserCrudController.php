@@ -3,6 +3,7 @@ namespace App\Controller\Admin\CRUD;
 
 use App\Entity\User;
 use App\Manager\UserManager;
+use App\Manager\VideoManager;
 use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Exception;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,11 +25,22 @@ class UserCrudController extends AbstractController
 
 
       /**
-       * @param UserManager $userManager
+       * @var VideoManager
       */
-      public function __construct(UserManager $userManager)
+      protected $videoManager;
+
+
+
+
+
+      /**
+       * @param UserManager $userManager
+       * @param VideoManager $videoManager
+      */
+      public function __construct(UserManager $userManager, VideoManager $videoManager)
       {
            $this->userManager = $userManager;
+           $this->videoManager = $videoManager;
       }
 
 
@@ -128,6 +140,29 @@ class UserCrudController extends AbstractController
     {
         if ($this->userManager->deleteUserById($id)) {
             dump("User with id {$id} deleted");
+        }
+
+        return new JsonResponse(['success' => "User with id {$id} deleted"], Response::HTTP_NO_CONTENT);
+    }
+
+
+
+
+
+    /**
+     * @Route("/admin/users/{id}/remove-video/{video}", name="admin.users.remove.video", methods={"DELETE"}, requirements={"id": "\d+", "video": "\d+"})
+    */
+    public function removeVideo(int $id, int $video): JsonResponse
+    {
+        if (! $video = $this->videoManager->findVideo($video)) {
+            return new JsonResponse(['success' => "Video with id {$id} does not exist"], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $user = $this->userManager->removeUserVideo($id, $video);
+
+
+        foreach ($user->getVideos() as $video) {
+             dump($video->getTitle());
         }
 
         return new JsonResponse(['success' => "User with id {$id} deleted"], Response::HTTP_NO_CONTENT);

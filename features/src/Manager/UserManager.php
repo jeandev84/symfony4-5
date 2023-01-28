@@ -2,6 +2,7 @@
 namespace App\Manager;
 
 use App\Entity\User;
+use App\Entity\Video;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -126,6 +127,25 @@ class UserManager
     public function getUserVideos(int $userId): Collection
     {
          return $this->findUserById($userId)->getVideos();
+    }
+
+
+    /**
+     * @param int $userId
+     * @param Video $video
+     * @return User|false
+    */
+    public function removeUserVideo(int $userId, Video $video)
+    {
+        if(!$user = $this->findUserById($userId)) {
+            return false;
+        }
+
+        $user->removeVideo($video);
+
+        $this->entityManager->flush();
+
+        return $user;
     }
 
 

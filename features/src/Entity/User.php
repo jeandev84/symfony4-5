@@ -37,7 +37,7 @@ class User
 
 
     /**
-     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="user", cascade={"remove"})
     */
     private $videos;
 
