@@ -83,7 +83,7 @@ class UserCrudController extends AbstractController
      {
          $user = $this->userManager->createUser($request->request->all());
 
-         return new JsonResponse(['success' => "A new user was saved with id of {$user->getId()}"], Response::HTTP_OK);
+         return new JsonResponse(['success' => "A new user was saved with id of {$user->getId()}"], Response::HTTP_CREATED);
      }
 
 

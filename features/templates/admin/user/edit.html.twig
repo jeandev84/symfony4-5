@@ -2,6 +2,6 @@
 <div class="create-user">
     <form action="{{ path('admin.users.update', {'id': user.id }) }}" method="POST">
         <input type="hidden" name="_method" value="PUT">
-        {% include 'admin/user/partials/_form.twig.html' %}
+        {% include 'admin/user/partials/_form.html.twig' %}
     </form>
 </div>
