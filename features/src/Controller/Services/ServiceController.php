@@ -1,7 +1,8 @@
 <?php
-namespace App\Controller\Container;
+namespace App\Controller\Services;
 
 use App\Service\DemoService;
+use App\Service\Lazy\FirstService;
 use App\Service\MyFirstService;
 use App\Service\PropertyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -59,6 +60,19 @@ class ServiceController  extends AbstractController
        {
              $propertyService->someAction();
 
-             dd('Block');
+             dd('Finish execution!');
        }
+
+
+
+
+      /**
+       * @Route("/lazy-service", name="lazy.service")
+      */
+      public function showLazyService(FirstService $service)
+      {
+            // dd($firstService);
+
+            dd($service->secondService->someMethod());
+      }
 }

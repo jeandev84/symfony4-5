@@ -57,3 +57,14 @@ services:
         properties:
            dummy: '@App\Service\DummyService'
            logger: '@monolog.logger'
+
+
+
+    App\Service\Lazy\FirstService:
+        arguments:
+           $service: '@App\Service\Lazy\SecondService'
+
+
+
+    App\Service\Lazy\SecondService:
+        lazy: true

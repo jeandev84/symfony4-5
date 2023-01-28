@@ -969,3 +969,10 @@ abstract class File
 }
 
 ```
+
+
+11. Services 
+```
+$ composer require symfony/proxy-manager-bridge
+
+```
