@@ -4,15 +4,33 @@ namespace App\Service;
 class MyFirstService
 {
 
+     use OptionalServiceTrait;
 
-    /**
-     * @var MySecondService
-    */
-    protected $secondService;
 
-    public function __construct(MySecondService $secondService)
-    {
-         $this->secondService = $secondService;
-    }
+     protected $service;
+
+     public function __construct()
+     {
+
+     }
+
+
+//    /**
+//     * @required
+//     * @param MyThirdService $thirdService
+//     * @return void
+//    */
+//    public function setMyThirdService(MyThirdService $thirdService)
+//    {
+//         dump('@required annotation inject "thirdService" automatically to the constructor');
+//         dd($thirdService);
+//    }
+
+
+
+     public function someAction()
+     {
+          return $this->service->doSomething2();
+     }
 
 }

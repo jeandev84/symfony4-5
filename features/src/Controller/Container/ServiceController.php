@@ -43,6 +43,8 @@ class ServiceController  extends AbstractController
       */
        public function showMyFirstService(MyFirstService $firstService)
        {
-             dd($firstService);
+             // dd($firstService);
+
+             dd($firstService->someAction());
        }
 }
