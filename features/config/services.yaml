@@ -51,3 +51,9 @@ services:
 
 #    App\Service\FooService:
 #        autowire: false
+
+
+    App\Service\PropertyService:
+        properties:
+           dummy: '@App\Service\DummyService'
+           logger: '@monolog.logger'

@@ -3,6 +3,7 @@ namespace App\Controller\Container;
 
 use App\Service\DemoService;
 use App\Service\MyFirstService;
+use App\Service\PropertyService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -46,5 +47,18 @@ class ServiceController  extends AbstractController
              // dd($firstService);
 
              dd($firstService->someAction());
+       }
+
+
+
+
+       /**
+        * @Route("/property-service", name="property.service")
+       */
+       public function showPropertyService(PropertyService $propertyService)
+       {
+             $propertyService->someAction();
+
+             dd('Block');
        }
 }
