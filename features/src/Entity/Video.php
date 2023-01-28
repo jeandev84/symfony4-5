@@ -35,7 +35,7 @@ class Video
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="videos")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
     */
     private $user;
 

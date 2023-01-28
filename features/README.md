@@ -268,4 +268,8 @@ FIXTURE LOAD ALL || FIXTURE ONE BY ONE
 $ bin/console doctrine:fixtures:load
 $ bin/console doctrine:fixtures:load --group=VideoFixtures
 $ bin/console doctrine:fixtures:load --group=UserFixtures
+
+======================================================================================
+$ bin/console doctrine:database:create
+$ bin/console doctrine:schema:drop -n -q --force --full-database && rm ./migrations/*.php && bin/console make:migration && bin/console doctrine:migrations:migrate -n -q
 ```
