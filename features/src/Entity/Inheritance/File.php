@@ -9,7 +9,7 @@ use App\Repository\Inheritance\FileRepository;
 
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
- * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="typeOfFile", type="string")
  * @ORM\DiscriminatorMap({
  *     "video" = "App\Entity\Inheritance\Files\VideoFile",
