@@ -3,6 +3,7 @@ namespace App\Controller\Admin\CRUD;
 
 use App\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -79,4 +80,19 @@ class UserCrudController extends AbstractController
 
           return $this->render('admin/crud/user/form/edit.html.twig');
      }
+
+
+
+
+    /**
+     * @Route("/admin/users/{id}", name="admin.users.delete", methods={"DELETE"})
+     */
+    public function delete($id): Response
+    {
+        if ($this->userManager->deleteUser($id)) {
+            dump("User with id {$id} deleted");
+        }
+
+        return new JsonResponse(['success' => "User with id {$id} deleted"]);
+    }
 }

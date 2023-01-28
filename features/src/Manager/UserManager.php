@@ -40,6 +40,8 @@ class UserManager
 
 
 
+
+
     public function updateUser(int $id, array $payload)
     {
          if(!$user = $this->findUserById($id)) {
@@ -63,6 +65,23 @@ class UserManager
           }
 
           $this->entityManager->flush();
+    }
+
+
+    /**
+     * @param int $id
+     * @return bool
+    */
+    public function deleteUser(int $id): bool
+    {
+        if(!$user = $this->findUserById($id)) {
+            return false;
+        }
+
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+
+        return true;
     }
 
 
