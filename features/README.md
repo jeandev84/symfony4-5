@@ -863,4 +863,9 @@ Next: Review the new migration "migrations/Version20230128192358.php"
 Then: Run the migration with php bin/console doctrine:migrations:migrate
 
 @terminal$ 
+
+
+================== INHERITANCE TABLE TYPE ( JOINED )==================================================
+
+
 ```
