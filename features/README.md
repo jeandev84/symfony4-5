@@ -555,7 +555,201 @@ What type of relationship is this?
 @terminal$ 
 
 
-===================================================================================================
+=========================== ENTITIES  ===============================
+
+<?php
+namespace App\Entity\Inheritance;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\Inheritance\AuthorRepository;
+
+
+/**
+ * @ORM\Entity(repositoryClass=AuthorRepository::class)
+*/
+class Author
+{
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\OneToMany(targetEntity=File::class, mappedBy="author")
+     */
+    private $files;
+
+    public function __construct()
+    {
+        $this->files = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, File>
+     */
+    public function getFiles(): Collection
+    {
+        return $this->files;
+    }
+
+    public function addFile(File $file): self
+    {
+        if (!$this->files->contains($file)) {
+            $this->files[] = $file;
+            $file->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFile(File $file): self
+    {
+        if ($this->files->removeElement($file)) {
+            // set the owning side to null (unless already changed)
+            if ($file->getAuthor() === $this) {
+                $file->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+}
+
+
+
+<?php
+namespace App\Entity\Inheritance\Files;
+
+use App\Entity\Inheritance\File;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\Inheritance\Files\PdfFileRepository;
+
+
+
+/**
+ * @ORM\Entity(repositoryClass=PdfFileRepository::class)
+ */
+class PdfFile extends File
+{
+
+    /**
+     * @ORM\Column(type="integer")
+    */
+    private $pages_number;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $orientation;
+
+
+    public function getPagesNumber(): ?int
+    {
+        return $this->pages_number;
+    }
+
+    public function setPagesNumber(int $pages_number): self
+    {
+        $this->pages_number = $pages_number;
+
+        return $this;
+    }
+
+    public function getOrientation(): ?string
+    {
+        return $this->orientation;
+    }
+
+    public function setOrientation(string $orientation): self
+    {
+        $this->orientation = $orientation;
+
+        return $this;
+    }
+}
+
+
+
+<?php
+namespace App\Entity\Inheritance\Files;
+
+
+use App\Entity\Inheritance\File;
+use Doctrine\ORM\Mapping as ORM;
+use App\Repository\Inheritance\Files\VideoFileRepository;
+
+
+
+/**
+ * @ORM\Entity(repositoryClass=VideoFileRepository::class)
+*/
+class VideoFile extends File
+{
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $format;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $duration;
+
+
+    public function getFormat(): ?string
+    {
+        return $this->format;
+    }
+
+    public function setFormat(string $format): self
+    {
+        $this->format = $format;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): self
+    {
+        $this->duration = $duration;
+
+        return $this;
+    }
+}
+
+
+================== INHERITANCE TABLE TYPE ( SINGLE_TABLE )==================================================
 
 <?php
 namespace App\Entity\Inheritance;
@@ -565,8 +759,15 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\Inheritance\FileRepository;
 
 
+
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="typeOfFile", type="string")
+ * @ORM\DiscriminatorMap({
+ *     "video" = "App\Entity\Inheritance\Files\VideoFile",
+ *     "pdf" = "App\Entity\Inheritance\Files\PdfFile"
+ * })
 */
 abstract class File
 {
@@ -652,4 +853,14 @@ abstract class File
 }
 
 
+@terminal $ bin/console doctrine:schema:drop -n -q --force --full-database && rm ./migrations/*.php && bin/console make:migration && bin/console doctrine:migrations:migrate -n -q
+
+           
+Success! 
+           
+
+Next: Review the new migration "migrations/Version20230128192358.php"
+Then: Run the migration with php bin/console doctrine:migrations:migrate
+
+@terminal$ 
 ```

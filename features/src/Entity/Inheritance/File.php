@@ -6,8 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\Inheritance\FileRepository;
 
 
+
 /**
  * @ORM\Entity(repositoryClass=FileRepository::class)
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="typeOfFile", type="string")
+ * @ORM\DiscriminatorMap({
+ *     "video" = "App\Entity\Inheritance\Files\VideoFile",
+ *     "pdf" = "App\Entity\Inheritance\Files\PdfFile"
+ * })
 */
 abstract class File
 {
