@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Posts {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+       <div class="posts-content"></div>
+       <div class="most-popular-posts">
+           <h1>Most Popular Posts</h1>
+           <p>
+               {{ render(controller(
+                   'App\\Controller\\PostController::mostPopularPosts',
+                   {'number': 5}
+               )) }}
+           </p>
+       </div>
+    </div>
+
+{% endblock %}
