@@ -27,22 +27,22 @@ class DemoService
      /**
       * @var string
      */
-     protected $admin_email;
+     protected $adminEmail;
 
 
      /**
       * @param string $globalParam
       * @param string $param1
       * @param string $param2
-      * @param string $admin_email
+      * @param string $adminEmail
      */
-     public function __construct(string $globalParam, string $param1, string $param2, string $admin_email)
+     public function __construct(string $globalParam, string $param1, string $param2, string $adminEmail)
      {
           // dump('I am live');
           $this->globalParam = $globalParam;
           $this->param1 = $param1;
           $this->param2 = $param2;
-          $this->admin_email = $admin_email;
+          $this->adminEmail = $adminEmail;
      }
 
 
