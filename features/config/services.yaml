@@ -103,6 +103,6 @@ services:
 
 
     # Registration our event listeners
-    App\EventListener\VideoCreatedListener:
-        tags:
-          - { name: kernel.event_listener, event: video.created.event, method: onVideoCreatedEvent }
+#    App\EventListener\VideoCreatedListener:
+#        tags:
+#          - { name: kernel.event_listener, event: video.created.event, method: onVideoCreatedEvent }
