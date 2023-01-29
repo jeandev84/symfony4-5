@@ -7,6 +7,7 @@ use App\Service\Lazy\FirstService;
 use App\Service\MyFirstService;
 use App\Service\MyServiceWithAlias;
 use App\Service\PropertyService;
+use App\Service\Upload\Contract\FileUploaderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -103,5 +104,16 @@ class ServiceController  extends AbstractController
             $entityManager->flush();
 
             dd($user);
+      }
+
+
+
+
+      /**
+       * @Route("/file-uploader-service", name="file.uploader.service")
+      */
+      public function uploadFile(FileUploaderInterface $uploader)
+      {
+             dd($uploader);
       }
 }

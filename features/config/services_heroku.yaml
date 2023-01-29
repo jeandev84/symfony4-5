@@ -1,0 +1,9 @@
+imports:
+   - { resource: services.yaml }
+
+
+services:
+  # Example Bind Service interface
+  # This will be enabled only in APP_ENV=heroku (.env)
+  # ENV_DEBUG=true for debug how it's work
+  App\Service\Upload\Contract\FileUploaderInterface: '@App\Service\Upload\S3FileUploader'

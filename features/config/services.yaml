@@ -53,13 +53,14 @@ services:
 #        autowire: false
 
 
+    # Definition Service Properties
     App\Service\PropertyService:
         properties:
            dummy: '@App\Service\DummyService'
            logger: '@monolog.logger'
 
 
-
+    # Definition Lazy service
     App\Service\Lazy\FirstService:
         arguments:
            $service: '@App\Service\Lazy\SecondService'
@@ -70,7 +71,7 @@ services:
         lazy: true
 
 
-
+   # Definition service alias
     app.service.alias:
         class: App\Service\MyServiceWithAlias
         arguments:
@@ -82,7 +83,13 @@ services:
     App\Service\MyServiceWithAlias: '@app.service.alias'
 
 
+
+    # Definition Service tags
     App\Service\Tag\ServiceTags:
         tags:
           - { name: doctrine.event_listener, event: postFlush }
           - { name: kernel.cache_clearer }
+
+
+    # Example Bind Service interface
+    App\Service\Upload\Contract\FileUploaderInterface: '@App\Service\Upload\LocalFileUploader'
