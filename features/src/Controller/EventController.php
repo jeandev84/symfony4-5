@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 
+use App\Service\Module\PushContentToArrayService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,30 @@ class EventController extends AbstractController
 
 
 
+       /**
+        * @Route("/push-content", name="push.content")
+       */
+       public function pushContent(): JsonResponse
+       {
+             $root = $this->getParameter('kernel.project_dir');
+
+             $dummyStub = $root.'/src/Service/Module/stub/DummyController.stub';
+
+             // dd(file($dummyStub, FILE_SKIP_EMPTY_LINES|FILE_IGNORE_NEW_LINES));
+
+             $dummyToArray = file($dummyStub, FILE_SKIP_EMPTY_LINES|FILE_IGNORE_NEW_LINES);
+
+
+             $service = new PushContentToArrayService($dummyToArray);
+
+             $service->addContent("New content");
+
+
+             dd($service->getData());
+
+
+             return new JsonResponse(['success' => "Content successfully pushed!"]);
+       }
 
        /**
         * @Route("/app/video/create", name="video.create")

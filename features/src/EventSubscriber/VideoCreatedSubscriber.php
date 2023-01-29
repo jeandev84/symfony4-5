@@ -15,7 +15,11 @@ class VideoCreatedSubscriber implements EventSubscriberInterface
     {
         return [
             'video.created.event' => 'onVideoCreatedEvent',
-            KernelEvents::RESPONSE => 'onKernelResponse'
+            // KernelEvents::RESPONSE => 'onKernelResponse'
+            KernelEvents::RESPONSE => [
+                ['onKernelResponse1', 2],
+                ['onKernelResponse2', 1], // this will be called first because it has higher priority number
+            ]
         ];
     }
 
@@ -40,5 +44,17 @@ class VideoCreatedSubscriber implements EventSubscriberInterface
          $response = new JsonResponse(["success" => $content]);
 
          $event->setResponse($response);
+    }
+
+
+    public function onKernelResponse1(ResponseEvent $event)
+    {
+          dump("Called ". __METHOD__);
+    }
+
+
+    public function onKernelResponse2(ResponseEvent $event)
+    {
+         dump("Called ". __METHOD__);
     }
 }
