@@ -65,7 +65,7 @@ class VideoFormController extends AbstractController
             // dump($form->getData());
 
             $this->videoManager->saveVideo($video);
-            return $this->redirectToRoute('video.form');
+            return $this->redirectToRoute('admin.videos.form.create');
         }
 
 
@@ -93,7 +93,7 @@ class VideoFormController extends AbstractController
             // dump($form->getData());
 
             $this->videoManager->saveVideo($video);
-            return $this->redirectToRoute('video.form');
+            return $this->redirectToRoute('admin.videos.form.update');
         }
 
 
