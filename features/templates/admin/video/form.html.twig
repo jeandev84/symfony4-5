@@ -5,6 +5,7 @@
 {% block body %}
 
     <div class="container">
+
         {#
         {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -14,7 +15,24 @@
         <!-- Override global form theme form ./config/packages/twig.yaml -->
         {% form_theme form 'form_table_layout.html.twig'%}
         <div class="video-form">
-           {{ form(form) }}
+
+           {#  {{ form(form) }}  #}
+
+            {{ form_start(form) }}
+
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
+
+                {% if  form.createdAt is defined %}
+                    {{ form_label(form.createdAt) }}
+                    {{ form_widget(form.createdAt) }}
+                {% endif %}
+
+                {{ form_label(form.save) }}
+                {{ form_widget(form.save) }}
+
+            {{ form_end(form) }}
+
         </div>
     </div>
 

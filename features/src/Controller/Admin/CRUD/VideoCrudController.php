@@ -75,38 +75,4 @@ class VideoCrudController extends AbstractController
      {
 
      }
-
-
-
-     /**
-      * @Route("/admin/video-form", name="video.form")
-     */
-     public function saveVideoFromForm(Request $request): Response
-     {
-          $videos = $this->videoManager->getVideos();
-          dump($videos);
-
-          $video = new Video();
-
-          /*
-          $video->setTitle('Write a blog post');
-          $video->setCreatedAt(new \DateTime('tomorrow'));
-          */
-
-          $form = $this->createForm(VideoFormType::class, $video);
-          $form->handleRequest($request);
-
-          if ($form->isSubmitted() && $form->isValid()) {
-
-                 // dump($form->getData());
-
-                 $this->videoManager->saveVideo($video);
-                 return $this->redirectToRoute('video.form');
-          }
-
-
-          return $this->render("admin/video/form.html.twig", [
-              'form' => $form->createView()
-          ]);
-     }
 }
