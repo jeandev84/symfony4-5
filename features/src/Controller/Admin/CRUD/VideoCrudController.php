@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller\Admin\CRUD;
 
+use App\Entity\Video;
+use App\Form\VideoFormType;
 use App\Manager\UserManager;
 use App\Manager\VideoManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -72,5 +74,35 @@ class VideoCrudController extends AbstractController
      public function showUserVideos(int $id)
      {
 
+     }
+
+
+
+     /**
+      * @Route("/admin/video-form", name="video.form")
+     */
+     public function saveVideoFromForm(Request $request): Response
+     {
+          $video = new Video();
+
+          /*
+          $video->setTitle('Write a blog post');
+          $video->setCreatedAt(new \DateTime('tomorrow'));
+          */
+
+          $form = $this->createForm(VideoFormType::class, $video);
+          $form->handleRequest($request);
+
+          if ($form->isSubmitted() && $form->isValid()) {
+
+                 dump($form->getData());
+
+                 // return $this->redirectToRoute('home');
+          }
+
+
+          return $this->render("admin/video/form.html.twig", [
+              'form' => $form->createView()
+          ]);
      }
 }
