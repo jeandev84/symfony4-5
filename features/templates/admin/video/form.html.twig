@@ -14,6 +14,7 @@
 
         <!-- Override global form theme form ./config/packages/twig.yaml -->
         {# {% form_theme form 'form_table_layout.html.twig'%} #}
+        {# {% form_theme form 'bootstrap_4_layout.html.twig'%} #}
         <div class="video-form">
 
            {#  {{ form(form) }}  #}
@@ -28,8 +29,13 @@
                     {{ form_widget(form.createdAt) }}
                 {% endif %}
 
+                {{ form_label(form.file) }}
+                {{ form_widget(form.file) }}
+
+
                 {{ form_label(form.agreeTerms) }}
                 {{ form_widget(form.agreeTerms) }}
+
 
                 {{ form_label(form.save) }}
                 {{ form_widget(form.save) }}

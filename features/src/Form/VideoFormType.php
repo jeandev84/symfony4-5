@@ -11,6 +11,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+
+
 
 class VideoFormType extends AbstractType
 {
@@ -25,10 +28,12 @@ class VideoFormType extends AbstractType
                 'label'    => 'Agree ?',
                 'mapped'   => false
             ])
+            ->add('file', FileType::class, [
+                'label' => 'Video (MP4 File)'
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'Add a video'
-            ])
-        ;
+            ]);
 
 
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event) {

@@ -5,6 +5,7 @@ use App\Entity\Video;
 use App\Form\VideoFormType;
 use App\Manager\UserManager;
 use App\Manager\VideoManager;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -91,6 +92,12 @@ class VideoFormController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // dump($form->getData());
+
+            /** @var UploadedFile $file */
+            $file = $form->get('file')->getData();
+            $fileName = sha1(random_bytes(14)) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('videos_directory'), $fileName);
+            $video->setFile($file);
 
             $this->videoManager->saveVideo($video);
             return $this->redirectToRoute('admin.videos.form.update');
