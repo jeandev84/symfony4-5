@@ -982,3 +982,18 @@ $ bin/console debug:container  [ DEBUG ALL SERVICE IN CONTAINER ]
 ```
 $ composer require symfony/cache
 ```
+
+13. Symfony console commands 
+```
+$ bin/console about
+$ bin/console list
+$ bin/console list doctrine
+$ bin/console debug:router
+$ bin/console debug:autowiring
+$ bin/console debug:container
+$ bin/console debug:config services (service.yaml)
+$ bin/console debug:config twig (twig.yaml)
+$ bin/console make:controller
+$ bin/console help make:controller
+$ bin/console make:entity
+```
