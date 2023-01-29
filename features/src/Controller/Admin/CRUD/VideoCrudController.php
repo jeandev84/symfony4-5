@@ -83,6 +83,9 @@ class VideoCrudController extends AbstractController
      */
      public function saveVideoFromForm(Request $request): Response
      {
+          $videos = $this->videoManager->getVideos();
+          dump($videos);
+
           $video = new Video();
 
           /*
@@ -95,9 +98,10 @@ class VideoCrudController extends AbstractController
 
           if ($form->isSubmitted() && $form->isValid()) {
 
-                 dump($form->getData());
+                 // dump($form->getData());
 
-                 // return $this->redirectToRoute('home');
+                 $this->videoManager->saveVideo($video);
+                 return $this->redirectToRoute('video.form');
           }
 
 
