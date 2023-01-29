@@ -997,3 +997,19 @@ $ bin/console make:controller
 $ bin/console help make:controller
 $ bin/console make:entity
 ```
+
+
+14. Deploy Symfony application 
+```
+# https://symfony.com/doc/current/deployment.html
+$ composer require symfony/requirements-checker
+
+http://localhost:8000/check.php
+
+$ composer remove symfony/requirements-checker
+$ composer install --no-dev --optimize-autoloader
+$ composer dump-autoload --optimize --no-dev --classmap-authoritative
+$ bin/console doctrine:database:create
+$ bin/console doctrine:migrations:generate
+$ bin/console cache:clear --env=prod --no-debug
+```
