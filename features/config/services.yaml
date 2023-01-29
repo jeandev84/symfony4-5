@@ -93,3 +93,10 @@ services:
 
     # Example Bind Service interface
     App\Service\Upload\Contract\FileUploaderInterface: '@App\Service\Upload\LocalFileUploader'
+
+
+
+    # Configure Kernel Response Listener service
+    App\Service\Kernel\KernelResponseListener:
+        tags:
+          - { name: kernel.event_listener, event: kernel.response }
