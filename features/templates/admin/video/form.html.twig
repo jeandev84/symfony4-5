@@ -11,7 +11,11 @@
         {{ form_end(form) }}
         #}
 
-        {{ form(form) }}
+        <!-- Override global form theme form ./config/packages/twig.yaml -->
+        {% form_theme form 'form_table_layout.html.twig'%}
+        <div class="video-form">
+           {{ form(form) }}
+        </div>
     </div>
 
 {% endblock %}
