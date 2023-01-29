@@ -1,8 +1,7 @@
 <?php
-namespace App\Service\Kernel;
+namespace App\Service\Listener\Kernel;
 
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 
@@ -13,7 +12,7 @@ class KernelResponseListener
      {
          // This implementation will modify the kernel.response
 
-          $response = new Response('some modification response content');
+          $response = new Response('some modification response content form ['. __METHOD__ . ']');
 
           $event->setResponse($response);
      }

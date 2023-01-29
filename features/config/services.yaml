@@ -85,10 +85,10 @@ services:
 
 
     # Definition Service tags
-    App\Service\Tag\ServiceTags:
-        tags:
-          - { name: doctrine.event_listener, event: postFlush }
-          - { name: kernel.cache_clearer }
+#    App\Service\Tag\ServiceTags:
+#        tags:
+#          - { name: doctrine.event_listener, event: postFlush }
+#          - { name: kernel.cache_clearer }
 
 
     # Example Bind Service interface
@@ -97,6 +97,12 @@ services:
 
 
     # Configure Kernel Response Listener service
-    App\Service\Kernel\KernelResponseListener:
+#    App\Service\Listener\Kernel\KernelResponseListener:
+#        tags:
+#          - { name: kernel.event_listener, event: kernel.response }
+
+
+    # Registration our event listeners
+    App\EventListener\VideoCreatedListener:
         tags:
-          - { name: kernel.event_listener, event: kernel.response }
+          - { name: kernel.event_listener, event: video.created.event, method: onVideoCreatedEvent }
