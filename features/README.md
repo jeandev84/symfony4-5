@@ -974,5 +974,6 @@ abstract class File
 11. Services 
 ```
 $ composer require symfony/proxy-manager-bridge
-
+$ bin/console debug:autowiring [ DEBUG ALL types hinting of services ]
+$ bin/console debug:container  [ DEBUG ALL SERVICE IN CONTAINER ]
 ```
