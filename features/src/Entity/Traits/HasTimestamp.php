@@ -2,6 +2,7 @@
 namespace App\Entity\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 trait HasTimestamp
@@ -9,6 +10,7 @@ trait HasTimestamp
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Type("\Datetime")
     */
     private $createdAt;
 
