@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller\DI;
+namespace App\Controller;
 
 use App\Entity\User;
 use App\Service\DemoService;
@@ -11,7 +11,6 @@ use App\Service\Upload\Contract\FileUploaderInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 

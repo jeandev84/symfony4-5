@@ -977,3 +977,8 @@ $ composer require symfony/proxy-manager-bridge
 $ bin/console debug:autowiring [ DEBUG ALL types hinting of services ]
 $ bin/console debug:container  [ DEBUG ALL SERVICE IN CONTAINER ]
 ```
+
+12. Symfony Cache Component
+```
+$ composer require symfony/cache
+```
