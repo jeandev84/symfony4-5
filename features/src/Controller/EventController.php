@@ -39,7 +39,7 @@ class EventController extends AbstractController
              $this->eventDispatcher->dispatch($event, VideoCreatedEvent::NAME);
 
 
-             dd('Dispatching');
+             // dd('Dispatching');
 
              return new JsonResponse(['success' => "Video successfully created and dispatched"]);
        }
