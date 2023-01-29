@@ -14,12 +14,12 @@ class VideoCreatedSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'video.created.event' => 'onVideoCreatedEvent',
-            // KernelEvents::RESPONSE => 'onKernelResponse'
-            KernelEvents::RESPONSE => [
-                ['onKernelResponse1', 2],
-                ['onKernelResponse2', 1], // this will be called first because it has higher priority number
-            ]
+//            'video.created.event' => 'onVideoCreatedEvent',
+//            // KernelEvents::RESPONSE => 'onKernelResponse'
+//            KernelEvents::RESPONSE => [
+//                ['onKernelResponse1', 2],
+//                ['onKernelResponse2', 1], // this will be called first because it has higher priority number
+//            ]
         ];
     }
 
