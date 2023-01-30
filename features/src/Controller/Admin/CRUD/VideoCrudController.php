@@ -75,4 +75,26 @@ class VideoCrudController extends AbstractController
      {
 
      }
+
+
+
+    /**
+     * @Route("/admin/videos/delete-by-owner/{id}", name="admin.video.delete.by-owner", methods={"DELETE"})
+     * @Security("securityUser.getId() == video.getSecurityUser().getId()")
+    */
+    public function deleteUserVideo(Video $video)
+    {
+        dd($video);
+    }
+
+
+
+    /**
+     * @Route("/admin/videos/delete-by-admin/{id}}", name="admin.video.delete.by.admin")
+     * @Security("has_role('ROLE_ADMIN')")
+    */
+    public function deleteVideoOnlyByAdmin(Video $video)
+    {
+        dd($video);
+    }
 }

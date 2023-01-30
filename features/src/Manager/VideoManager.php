@@ -1,9 +1,13 @@
 <?php
 namespace App\Manager;
 
+use App\Entity\SecurityUser;
 use App\Entity\User;
 use App\Entity\Video;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+
+
 
 class VideoManager
 {
@@ -43,6 +47,24 @@ class VideoManager
 
 
     /**
+     * @param Video $video
+     * @param array $payload
+     * @return Video
+    */
+    public function updateVideo(Video $video, array $payload): Video
+    {
+        $video->setTitle($payload['title']);
+        $video->setFile($payload['file']);
+        $video->setUpdatedAt(new \DateTime());
+        $this->saveVideo($video);
+
+        return $video;
+    }
+
+
+
+
+    /**
      * @param array $payload
      * @return Video
     */
@@ -50,8 +72,25 @@ class VideoManager
     {
          $video = new Video();
          $video->setTitle($payload['title']);
-
+         $video->setFile($payload['file']);
+         $video->setCreatedAt(new \DateTime());
          $this->saveVideo($video);
+
+         return $video;
+    }
+
+
+    /**
+     * @param Video $video
+     * @param SecurityUser $user
+     * @return Video
+    */
+    public function addSecurityUserVideo(Video $video, SecurityUser $user): Video
+    {
+         $video->setSecurityUser($user);
+
+         $this->entityManager->persist($video);
+         $this->entityManager->flush();
 
          return $video;
     }
