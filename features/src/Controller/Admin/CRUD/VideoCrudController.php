@@ -97,4 +97,32 @@ class VideoCrudController extends AbstractController
     {
         dd($video);
     }
+
+
+
+    public function unlessAccessAuthenticatedFully()
+    {
+          $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+          // User cannot access in this page if is not authenticated fully
+    }
+
+
+
+
+    public function unlessAccessUserByAdmin()
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
+        // User cannot access in this page if is not admin user
+    }
+
+
+
+    public function unlessAccessAuthenticatedRemembered()
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_REMEMBERED');
+
+        // User cannot access in front page if he does no checked remember me
+    }
 }
