@@ -3,21 +3,14 @@
 {% block title %}Hello{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>Welcome to symfony features</h1>
+<div class="container mt-5">
+    <nav>
+        <ul>
+            <li><a href="{{ path('auth.user.register') }}">Registration</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        <h1>Welcome to symfony features</h1>
+    </div>
 </div>
-
-<!-- Show authenticated user -->
-{{ app.user }}
-
-<!-- Show param from request: http://localhost:8000/?param=demo -->
-{{ app.request.get('param') }}
-
-<!-- Show environment variable -->
-{{ app.environment }}
-
-
-<!-- Show Session data -->
-{{ dump(app.session) }}
-
 {% endblock %}
