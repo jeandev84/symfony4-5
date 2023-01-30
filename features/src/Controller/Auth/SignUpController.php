@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
-class UserRegistrationController extends AbstractController
+class SignUpController extends AbstractController
 {
 
 
@@ -35,7 +35,7 @@ class UserRegistrationController extends AbstractController
      /**
       * @Route("/auth/user/register", name="auth.user.register")
      */
-     public function registration(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
      {
 
            # Registration
@@ -55,7 +55,7 @@ class UserRegistrationController extends AbstractController
 
 
 
-           return $this->render('auth/register/user/form.html.twig', [
+           return $this->render('auth/user/register.html.twig', [
                'form' => $form->createView()
            ]);
      }

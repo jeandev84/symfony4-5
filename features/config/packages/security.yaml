@@ -20,6 +20,17 @@ security:
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
+            # https://symfony.com/doc/4.4/security.html#3a-authentication-firewalls
+            # https://symfony.com/doc/4.4/security/form_login.html
+            # https://symfony.com/doc/4.4/security/form_login_setup.html
+            form_login:
+                login_path: auth.user.login
+                check_path: /auth/user/login
+                # html input fields name required
+                username_parameter: 'email'
+                password_parameter: 'password'
+                # https://symfony.com/doc/4.4/security/form_login.html#csrf-protection-in-login-forms
+                csrf_token_generator: security.csrf.token_manager
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
