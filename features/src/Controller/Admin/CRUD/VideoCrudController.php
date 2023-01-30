@@ -5,6 +5,7 @@ use App\Entity\Video;
 use App\Form\VideoFormType;
 use App\Manager\UserManager;
 use App\Manager\VideoManager;
+use App\Security\Voter\VideoVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -45,7 +46,7 @@ class VideoCrudController extends AbstractController
      /**
       * @Route("/admin/videos/{id}", name="admin.videos.show", methods={"GET"}, requirements={"id": "\d+"})
      */
-     public function show(int $id): Response
+     public function showUserVideosById(int $id): Response
      {
          $video = $this->videoManager->getVideoById($id);
 
@@ -69,13 +70,25 @@ class VideoCrudController extends AbstractController
 
 
      /**
-      * @param int $id
-      * @return void
+      * @Route("/admin/user-videos/{id}", name="admin.user.videos.show", methods={"GET"}, requirements={"id": "\d+"})
+      * @param Video $video
      */
-     public function showUserVideos(int $id)
+     public function showUserVideos(Video $video)
      {
-
+         $this->denyAccessUnlessGranted(VideoVoter::VIEW, $video);
      }
+
+
+
+
+    /**
+     * @Route("/admin/video-delete/{id}", name="admin.video.user.video", methods={"DELETE"}, requirements={"id": "\d+"})
+     * @param Video $video
+    */
+    public function deleteUserVideo(Video $video)
+    {
+        $this->denyAccessUnlessGranted(VideoVoter::DELETE, $video);
+    }
 
 
 
@@ -83,9 +96,9 @@ class VideoCrudController extends AbstractController
      * @Route("/admin/videos/delete-by-owner/{id}", name="admin.video.delete.by-owner", methods={"DELETE"})
      * @Security("securityUser.getId() == video.getSecurityUser().getId()")
     */
-    public function deleteUserVideo(Video $video)
+    public function deleteUserVideoByOwner(Video $video)
     {
-        dd($video);
+          dd($video);
     }
 
 
