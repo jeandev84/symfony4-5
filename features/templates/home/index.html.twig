@@ -8,6 +8,12 @@
         <ul>
             {% if app.user %}
                 <li><a href="{{ path('logout') }}">Logout</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="#">Delete something, only admin can do this</a></li>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li>Username: {{ app.user.username }}</li>
+                {% endif %}
             {% else %}
                 <li><a href="{{ path('auth.user.login') }}">Login</a></li>
                 <li><a href="{{ path('auth.user.register') }}">Registration</a></li>
