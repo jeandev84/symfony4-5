@@ -16,23 +16,6 @@ class SignInController extends AbstractController
 {
 
 
-      /**
-       * @var EntityManagerInterface
-      */
-      protected $entityManager;
-
-
-      /**
-       * @param EntityManagerInterface $entityManager
-      */
-      public function __construct(EntityManagerInterface $entityManager)
-      {
-           $this->entityManager = $entityManager;
-      }
-
-
-
-
      /**
       * @Route("/auth/user/login", name="auth.user.login")
      */
