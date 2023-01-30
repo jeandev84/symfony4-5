@@ -25,7 +25,7 @@ class EmailSenderController extends AbstractController
       */
       public function sendEmail(): Response
       {
-            $message = (new \Swift_Message('Hello email'))
+            $message = (new \Swift_Message('Hello Email'))
                       ->setFrom('send@example.com')
                       ->setTo('recipient@example.com')
                       ->setBody($this->renderView('emails/registration.html.twig', [
