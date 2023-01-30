@@ -60,6 +60,11 @@ class Video
     // maxSize="1024k", "5M"
     private $file;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=SecurityUser::class, inversedBy="videos")
+     */
+    private $securityUser;
+
 
 
 
@@ -111,6 +116,18 @@ class Video
     public function setFile(string $file): self
     {
         $this->file = $file;
+
+        return $this;
+    }
+
+    public function getSecurityUser(): ?SecurityUser
+    {
+        return $this->securityUser;
+    }
+
+    public function setSecurityUser(?SecurityUser $securityUser): self
+    {
+        $this->securityUser = $securityUser;
 
         return $this;
     }
