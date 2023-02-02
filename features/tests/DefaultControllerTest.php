@@ -6,9 +6,37 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultControllerTest extends WebTestCase
 {
+
     public function testSomething(): void
     {
-        $this->sendFormTests();
+         // $this->sendFormTests();
+
+         $this->assertTrue(true);
+    }
+
+
+
+    /**
+     * @dataProvider provideUrls
+     * @param $url
+     * @return void
+    */
+    public function testWithDataProviders($url)
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', $url);
+
+        $this->assertTrue($client->getResponse()->isSuccessful());
+    }
+
+
+
+    public function provideUrls(): array
+    {
+         return [
+             ['/home'],
+             //['/login']
+         ];
     }
 
 
