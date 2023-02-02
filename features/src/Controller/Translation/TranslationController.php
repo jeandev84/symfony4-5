@@ -47,11 +47,7 @@ class TranslationController extends AbstractController
 
 
     /**
-     * @Route({
-     *   "en": "/translate-url",
-     *   "fr": "/traduction-de-lien",
-     *   "ru": "/perevod-silka"
-     * }, name="translation.route")
+     * @Route("/pluralization", "pluralization")
      * @param Request $request
      * @param TranslatorInterface $translator
      * @return Response
@@ -61,6 +57,28 @@ class TranslationController extends AbstractController
 
         return $this->render('translation/index.html.twig', [
             'controller_name' => 'DefaultController',
+            'count' => 0
+        ]);
+    }
+
+
+
+
+    /**
+     * @Route({
+     *   "en": "/translate-url",
+     *   "fr": "/traduction-de-lien",
+     *   "ru": "/perevod-silka"
+     * }, name="translation.route")
+     * @param Request $request
+     * @param TranslatorInterface $translator
+     * @return Response
+     */
+    public function translationRouteDemo(Request $request, TranslatorInterface $translator): Response
+    {
+
+        return $this->render('translation/index.html.twig', [
+            'controller_name' => 'DefaultController'
         ]);
     }
 }

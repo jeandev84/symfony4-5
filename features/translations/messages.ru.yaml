@@ -1,0 +1,8 @@
+#'Symfony jest super': 'Симфони супер'
+#'some.key': 'Симфони супер'
+
+form:
+  login:
+    username: "Пользовоское имя"
+    password: "Пароль"
+    flash:  Симфони <b>супер</b>

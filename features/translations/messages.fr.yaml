@@ -6,3 +6,4 @@ form:
     username: "Pseudo"
     password: "Mot de passe"
     flash:  Symfony est <b>super</b>
+

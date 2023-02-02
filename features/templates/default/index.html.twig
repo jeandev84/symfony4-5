@@ -21,5 +21,7 @@
         <a href="{{ path('logout') }}">logout</a>
     {% endif %}
     <a href="{{ path('awesomeform') }}">awesome link</a>
+
+    {{ 'symfony.learning'|transchoice(count) }}
 </div>
 {% endblock %}
