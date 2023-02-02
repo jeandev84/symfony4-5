@@ -1,7 +1,7 @@
 <?php
 namespace App\Service\Math;
 
-class CalculatorService
+class Calculator
 {
 
     /**
