@@ -16,4 +16,15 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+
+
+
+    /**
+     * @Route("/awesome-form", name="awesomeform")
+    */
+    public function awesomeLink(): Response
+    {
+        return $this->render('default/awesome/form.html.twig');
+    }
 }

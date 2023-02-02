@@ -37,8 +37,6 @@ class DefaultControllerTest extends WebTestCase
         $this->assertContains('foo', [$client->getResponse()->getContent()]);
 
         $this->assertRegExp('/foo(bar)?/', $client->getResponse()->getContent()); assert Regular expression
-        */
-
 
         $this->assertTrue($client->getResponse()->isSuccessful(), 'response status is 2xx');
         $this->assertTrue($client->getResponse()->isNotFound());
@@ -54,5 +52,18 @@ class DefaultControllerTest extends WebTestCase
 
         # Client is redirected him self
         $this->assertTrue($client->getResponse()->isRedirect());
+        */
+
+
+        # Functional tests - click links
+        $link = $crawler->filter('a:contains("awesome link")')
+                        ->link(); // get link from html
+
+
+
+        # If clicked we will be redirected to "/awesome-form" and getting a new crawler
+        $crawler = $client->click($link);
+
+        $this->assertContains('Remember me', [$client->getResponse()->getContent()]);
     }
 }
