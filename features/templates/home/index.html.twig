@@ -23,5 +23,38 @@
     <div class="content">
         <h1>Welcome to symfony features</h1>
     </div>
+
+{#    {% trans %}#}
+{#        Symfony jest super#}
+{#    {% endtrans %}#}
+
+
+{#    {% trans %}#}
+{#        some.key#}
+{#    {% endtrans %}#}
+
+    <form action="">
+        <div class="message">
+            {% trans %} form.login.flash {% endtrans %}
+            {{ 'form.login.flash'|trans|raw }}
+        </div>
+        <div>
+            <label for="">
+                {% trans %}
+                    form.login.username
+                {% endtrans %}
+                {{ 'form.login.username'|trans|raw }}
+            </label>
+        </div>
+        <div>
+            <label for="">
+                {% trans %}
+                    form.login.password
+                {% endtrans %}
+                {{ 'form.login.password'|trans|raw }}
+            </label>
+        </div>
+    </form>
+
 </div>
 {% endblock %}

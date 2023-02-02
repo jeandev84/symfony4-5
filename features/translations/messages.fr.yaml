@@ -1,0 +1,8 @@
+#'Symfony jest super': 'Symfony est super'
+#'some.key': 'Symfony est super'
+
+form:
+  login:
+    username: "Pseudo"
+    password: "Mot de passe"
+    flash:  Symfony est <b>super</b>
