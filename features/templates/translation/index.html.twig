@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Translation{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <nav>
+        <ul>
+            {% if app.user %}
+                <li><a href="{{ path('logout') }}">Logout</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="#">Delete something, only admin can do this</a></li>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li>Username: {{ app.user.username }}</li>
+                {% endif %}
+            {% else %}
+                <li><a href="{{ path('auth.user.login') }}">Login</a></li>
+                <li><a href="{{ path('auth.user.register') }}">Registration</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="content">
+        <h1>Translation</h1>
+        {#    {% trans %}#}
+        {#        Symfony jest super#}
+        {#    {% endtrans %}#}
+
+
+        {#    {% trans %}#}
+        {#        some.key#}
+        {#    {% endtrans %}#}
+
+        <form action="">
+            <div class="message">
+                {% trans %} form.login.flash {% endtrans %}
+                {{ 'form.login.flash'|trans|raw }}
+            </div>
+            <div>
+                <label for="">
+                    {% trans %}
+                        form.login.username
+                    {% endtrans %}
+                    {{ 'form.login.username'|trans|raw }}
+                </label>
+            </div>
+            <div>
+                <label for="">
+                    {% trans %}
+                        form.login.password
+                    {% endtrans %}
+                    {{ 'form.login.password'|trans|raw }}
+                </label>
+            </div>
+        </form>
+    </div>
+
+{#    <a href="{{ path('home.fr') }}">awesome link</a>#}
+</div>
+{% endblock %}
